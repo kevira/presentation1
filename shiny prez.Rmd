@@ -1,0 +1,129 @@
+---
+title: "R for Data Analysis" 
+author: Age and Growth Otolith Microchemistry Projects
+output: 
+  ioslides_presentation:
+    keep_md: yes
+    widescreen: yes
+runtime: shiny
+self_contained: false
+keep_md: true
+
+---
+
+## Otolith Microchemical Analysis
+<div class="black">
+ Used to identify stocks and life histrory of fish 
+  </div> 
+
+![otoscan](pr1.jpg)
+
+<div class="black">
+Age and Growth Microchemistry Projects:
+ </div> 
+ 
+- P. Cod
+- Grenadier
+- Eulachon
+
+# Exploratory Data Analysis
+## Summarize with Visual Methods 
+<div class="columns-2">
+ ![violin](vio.png)
+
+- Check distribution 
+- Find outliers
+- Log-transform data
+</div>
+
+## More Plots
+ <div class="columns-2">
+ ![log](log10.png)
+ ![box](box1.png)
+ </div>
+
+## Static Plot
+![bar](bar.png)
+
+## Interactive Plot
+```{r,echo=FALSE, cache=TRUE}
+library(ggvis)
+library(shiny)
+gr<-read.csv("C:\\Users\\Irina\\Desktop\\shinyapp_final\\1.shinyprez\\gr_kali.csv", header=TRUE)
+```
+```{r,echo=FALSE}
+gr %>% ggvis(x = ~Li) %>%
+    layer_densities(fill:= "blue",
+      adjust = input_slider(.1, 2, value = 1, step = .1, label = "Bandwidth adjustment"),
+      kernel = input_select(
+        c("Gaussian" = "gaussian",
+          "Epanechnikov" = "epanechnikov",
+          "Rectangular" = "rectangular",
+          "Triangular" = "triangular",
+          "Biweight" = "biweight",
+          "Cosine" = "cosine",
+          "Optcosine" = "optcosine"),
+        label = "Kernel")
+    )
+
+```
+
+## Correlation Matricies
+<div class="columns-2">
+![alt text](cor2.jpeg)
+
+![alt text](cor1.jpeg)
+</div>
+
+# 'Ageing Criteria' Analysis
+## Work with Multiple Individual Plots
+- Use faceted plots to visualize over 200 transect lines
+- Use spline to fit a curve 
+
+![pr2](pr2.jpg)
+
+## Work with Multiple Variables
+- Combine variables from different data sets
+- Transform some but not others or combine different scales
+
+![ba&sr](sbsmooth.jpg)
+
+## Plots with Transperent Background
+![alt text](oreoto.png)
+
+## Agreement
+![alt text](Bubble.png)
+
+# Canonical Discriminant Analysis
+## CDA Plots
+<div class="columns-2">
+![alt text](Cda.png)
+
+![alt text](Can1.jpeg)
+</div>
+
+## Combination CDA plot
+![alt text](CDAcomb.jpeg)
+
+# Work in progress
+## Reproducible Research 
+<div class="columns-2">
+- Single document contains analysis, code, and results
+- Publishing to web or word document
+- Automatically regenerate documents when assumptions change
+- Eliminate errors that happens when copying results into documents
+
+![Image](markd.PNG)
+ </div>
+
+## Building Interactive Web Application
+ - Accessible to all users 
+ 
+https://elemental.shinyapps.io/shinyAPPscatter
+https://elemental.shinyapps.io/shinyAPPbox/
+https://elemental.shinyapps.io/shinyAPPcda/
+
+
+
+
+
